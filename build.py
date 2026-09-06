@@ -32,6 +32,10 @@ PAGES = {
     "about.html": ("about", f"אודות | {SITE}",
                    "הרב יעקב מאור - ראש כולל אורות האמונה בני משה, מלמד אמונה "
                    "ומחבר הספרים."),
+    "rosh-hashana.html": ("rosh", f"רעיונות לקבלות לראש השנה | {SITE}",
+                          "רעיונות לקבלות לימים הנוראים - 139 קבלות מעשיות "
+                          "לפי נושאים, לגברים ולנשים, ואיך בוחרים קבלה שאפשר "
+                          "לעמוד בה."),
     "shiurim.html": ("shiurim", f"שיעורים | {SITE}",
                      "שיעורי רבני הכולל ושיעורים נבחרים מרבנים אחרים, באישורם, "
                      "עם הסבר על כל שיעור."),
@@ -47,7 +51,7 @@ def shell(active: str, title: str, desc: str, body: str) -> str:
     head = (HERE / "_shell-head.html").read_text(encoding="utf-8")
     foot = (HERE / "_shell-foot.html").read_text(encoding="utf-8")
     head = head.replace("{{TITLE}}", esc(title)).replace("{{DESC}}", esc(desc))
-    for key in ("home", "shiurim", "books", "about"):
+    for key in ("home", "rosh", "shiurim", "books", "about"):
         head = head.replace("{{NAV_%s}}" % key.upper(),
                             ' class="active"' if key == active else "")
     return head + "\n" + body.rstrip() + "\n\n" + foot
