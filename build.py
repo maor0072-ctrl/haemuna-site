@@ -79,6 +79,25 @@ def shiur_section(block: dict) -> str:
     return "\n".join(out)
 
 
+# התוכן יושב באתר המקדש ("המקדש הוא התוכן, השני הוא הקישור", הכרעה ג6) - כאן רק קישורים
+MIKDASH_LIBRARY = """<section>
+  <div class="wrap prose">
+    <h2 class="section-title">ספריית השיעורים</h2>
+    <p>יותר מאלף שיעורים וסרטונים שלי, לצפייה ישירה, יושבים באתר העמותה: <a href="https://hamikdash.co.il/videos/">לספריית השיעורים והסרטונים</a>.</p>
+    <h3>מאמרים לפי נושא</h3>
+    <ul>
+      <li><a href="https://hamikdash.co.il/torah/bitachon-vehishtadlut.html">ביטחון והשתדלות</a> - לפרנסה, ללחץ ולדאגה</li>
+      <li><a href="https://hamikdash.co.il/torah/tefila-shelo-nenata.html">תפילה שלא נענתה</a> - למי שמתפלל שנים ולא רואה תשובה</li>
+      <li><a href="https://hamikdash.co.il/torah/chinuch-yeladim.html">חינוך ילדים</a> - להורים</li>
+      <li><a href="https://hamikdash.co.il/torah/zugiyut-vekaas.html">זוגיות וכעס</a> - לבית ולזוגיות</li>
+      <li><a href="https://hamikdash.co.il/torah/ahavat-chinam.html">אהבת חינם</a> - למחלוקת ולפגיעה</li>
+      <li><a href="https://hamikdash.co.il/torah/shabbat-vebayit.html">שבת ובית</a> - לבית ולילדים</li>
+    </ul>
+    <p><a href="https://hamikdash.co.il/chagim/">חגים ומועדים</a> - ראש השנה, יום כיפור, סוכות, פסח והצומות.</p>
+  </div>
+</section>"""
+
+
 def shiurim_body() -> tuple:
     data = json.loads((HERE / "data" / "shiurim.json").read_text(encoding="utf-8"))
     body = "\n\n".join([
@@ -87,6 +106,7 @@ def shiurim_body() -> tuple:
         '    <p>שיעורים של רבני הכולל, ולצידם שיעורים של רבנים אחרים שאני לומד '
         'מהם. כל שיעור כאן עולה באישור, ולצידו הסבר קצר למה הוא נמצא כאן.</p>\n'
         '  </div>\n</div>',
+        MIKDASH_LIBRARY,
         shiur_section(data["kollel"]),
         shiur_section(data["guests"]),
     ])
