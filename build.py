@@ -36,6 +36,12 @@ PAGES = {
                           "רעיונות לקבלות לימים הנוראים - 139 קבלות מעשיות "
                           "לפי נושאים, לגברים ולנשים, ואיך בוחרים קבלה שאפשר "
                           "לעמוד בה."),
+    "ma-over-alecha.html": ("matzav", f"מה עובר עליך | {SITE}",
+                            "מילה למי שנמצא עכשיו בתוך הקושי - פרנסה, אבל, פחד - "
+                            "מאת הרב יעקב מאור."),
+    "parnasa.html": ("matzav", f"כשהפרנסה לוחצת | {SITE}",
+                     "חובות, פיטורים, עסק שמתפרק: על השתדלות בלי בהלה, למי שייך "
+                     "הכסף, ומה אפשר לעשות כבר היום."),
     "shiurim.html": ("shiurim", f"שיעורים | {SITE}",
                      "שיעורי רבני הכולל ושיעורים נבחרים מרבנים אחרים, באישורם, "
                      "עם הסבר על כל שיעור."),
@@ -51,7 +57,7 @@ def shell(active: str, title: str, desc: str, body: str) -> str:
     head = (HERE / "_shell-head.html").read_text(encoding="utf-8")
     foot = (HERE / "_shell-foot.html").read_text(encoding="utf-8")
     head = head.replace("{{TITLE}}", esc(title)).replace("{{DESC}}", esc(desc))
-    for key in ("home", "rosh", "shiurim", "books", "about"):
+    for key in ("home", "rosh", "matzav", "shiurim", "books", "about"):
         head = head.replace("{{NAV_%s}}" % key.upper(),
                             ' class="active"' if key == active else "")
     return head + "\n" + body.rstrip() + "\n\n" + foot
