@@ -20,6 +20,7 @@ import json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+NL = chr(10)
 SITE = "ערוץ האמונה"
 
 PAGES = {
@@ -42,6 +43,9 @@ PAGES = {
     "parnasa.html": ("matzav", f"כשהפרנסה לוחצת | {SITE}",
                      "חובות, פיטורים, עסק שמתפרק: על השתדלות בלי בהלה, למי שייך "
                      "הכסף, ומה אפשר לעשות כבר היום."),
+    "mehashiur.html": ("shiurim", f"מתוך השיעור השבועי | {SITE}",
+                       "רעיונות, סיפורים ותשובות מתוך השיעור השבועי של הרב יעקב "
+                       "מאור, לפי נושאים: אמונה, מידות ועוד."),
     "shiurim.html": ("shiurim", f"שיעורים | {SITE}",
                      "שיעורי רבני הכולל ושיעורים נבחרים מרבנים אחרים, באישורם, "
                      "עם הסבר על כל שיעור."),
@@ -104,6 +108,64 @@ MIKDASH_LIBRARY = """<section>
 </section>"""
 
 
+# קטעים מהשיעור השבועי: רק מה שיעקב אישר בסבב היומי (scripts/shiur_daily_review.py).
+# הבנק של ה-AIOS הוא מקור האמת; כאן נשמר עותק, כי הריפו של האתר עומד בפני עצמו.
+BANK = HERE.parent.parent / "outputs" / "content" / "post-bank" / "shiur-shvui" / "index.json"
+BANK_COPY = HERE / "data" / "mehashiur.json"
+CAT_ORDER = ["אמונה", "מידות", "תפילה", "השגחה", "בין אדם לחברו", "בית וזוגיות", "חינוך"]
+
+
+def bank_items() -> list:
+    if BANK.exists():
+        BANK_COPY.write_text(BANK.read_text(encoding="utf-8"), encoding="utf-8")
+    return json.loads(BANK_COPY.read_text(encoding="utf-8")) if BANK_COPY.exists() else []
+
+
+def source_line(it: dict) -> str:
+    s = str(it.get("source", ""))
+    line = ("מקור: " + s.split(":", 1)[-1].strip()) if s.startswith("other") else "מתוך השיעור השבועי"
+    return line + (f" · מפגש {it['meeting']}" if it.get("meeting") else "")
+
+
+def mehashiur_body() -> str:
+    items = bank_items()
+    by = {}
+    for it in items:
+        by.setdefault(it["cat"], []).append(it)
+    cats = sorted(by, key=lambda c: (CAT_ORDER.index(c) if c in CAT_ORDER else 99, c))
+    toc = " · ".join(f'<a href="#{esc(c)}">{esc(c)}</a>' for c in cats)
+    head = ['<div class="page-head">', '  <div class="wrap">',
+            '    <h1>מתוך השיעור השבועי</h1>',
+            '    <p>רעיונות, סיפורים ותשובות לשאלות שעלו בשיעור השבועי, לפי נושאים. '
+            'כל קטע נבדק מול המקור לפני שעלה לכאן.</p>']
+    if toc:
+        head.append(f'    <p>{toc}</p>')
+    head += ['  </div>', '</div>']
+    out = [NL.join(head)]
+    if not items:
+        out.append('<section><div class="wrap"><p class="empty-note">בקרוב.</p></div></section>')
+    for c in cats:
+        sec = ['<section>', '  <div class="wrap prose">',
+               f'    <h2 class="section-title" id="{esc(c)}">{esc(c)}</h2>']
+        for it in by[c]:
+            sec.append('    <article class="shiur">')
+            sec.append(f'      <h3>{esc(it.get("hook") or it.get("title"))}</h3>')
+            sec += [f'      <p>{esc(par)}</p>' for par in str(it["body"]).split(NL) if par.strip()]
+            sec.append(f'      <p class="shiur-rav">{esc(source_line(it))}</p>')
+            sec.append('    </article>')
+        sec += ['  </div>', '</section>']
+        out.append(NL.join(sec))
+    return (NL + NL).join(out)
+
+
+LINK_MEHASHIUR = NL.join([
+    '<section>', '  <div class="wrap prose">',
+    '    <h2 class="section-title">מתוך השיעור השבועי</h2>',
+    '    <p>רעיונות, סיפורים ותשובות מהשיעור השבועי, לפי נושאים: '
+    '<a href="/mehashiur.html">לקטעים מהשיעור</a>.</p>',
+    '  </div>', '</section>'])
+
+
 def shiurim_body() -> tuple:
     data = json.loads((HERE / "data" / "shiurim.json").read_text(encoding="utf-8"))
     body = "\n\n".join([
@@ -112,6 +174,7 @@ def shiurim_body() -> tuple:
         '    <p>שיעורים של רבני הכולל, ולצידם שיעורים של רבנים אחרים שאני לומד '
         'מהם. כל שיעור כאן עולה באישור, ולצידו הסבר קצר למה הוא נמצא כאן.</p>\n'
         '  </div>\n</div>',
+        LINK_MEHASHIUR,
         MIKDASH_LIBRARY,
         shiur_section(data["kollel"]),
         shiur_section(data["guests"]),
@@ -127,6 +190,8 @@ def main():
     for name, (active, title, desc) in PAGES.items():
         if name == "shiurim.html":
             body, live, held = shiurim_body()
+        elif name == "mehashiur.html":
+            body = mehashiur_body()
         else:
             body = (HERE / "pages" / name).read_text(encoding="utf-8")
         (HERE / name).write_text(shell(active, title, desc, body), encoding="utf-8")
