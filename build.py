@@ -46,6 +46,9 @@ PAGES = {
     "mehashiur.html": ("shiurim", f"מתוך השיעור השבועי | {SITE}",
                        "רעיונות, סיפורים ותשובות מתוך השיעור השבועי של הרב יעקב "
                        "מאור, לפי נושאים: אמונה, מידות ועוד."),
+    "harav.html": ("shiurim", f"שיעורים של הרב יעקב מאור | {SITE}",
+                   "שיעורי וידאו מלאים של הרב יעקב מאור מהשיעור השבועי בכולל, "
+                   "עם כתוביות, לצפייה בטלפון ובמחשב."),
     "shiurim.html": ("shiurim", f"שיעורים | {SITE}",
                      "שיעורי רבני הכולל ושיעורים נבחרים מרבנים אחרים, באישורם, "
                      "עם הסבר על כל שיעור."),
@@ -166,6 +169,48 @@ LINK_MEHASHIUR = NL.join([
     '  </div>', '</section>'])
 
 
+# שיעורי הווידאו של הרב: data/shiurim.json, המפתח "harav". הווידאו יושב ביוטיוב
+# (לא רשום, המפתח "youtube") או בדרייב (המפתח "drive"), והעמוד מטמיע אותו.
+# החדש ביותר למעלה.
+def embed_src(it: dict) -> str:
+    if it.get("youtube"):
+        return f"https://www.youtube-nocookie.com/embed/{it['youtube']}?rel=0"
+    return f"https://drive.google.com/file/d/{it['drive']}/preview"
+
+def harav_body() -> str:
+    data = json.loads((HERE / "data" / "shiurim.json").read_text(encoding="utf-8"))
+    block = data.get("harav", {})
+    items = sorted([i for i in block.get("items", []) if i.get("approved")],
+                   key=lambda i: i.get("added", ""), reverse=True)
+    out = ['<div class="page-head">', '  <div class="wrap">',
+           '    <h1>שיעורים של הרב יעקב מאור</h1>',
+           f'    <p>{esc(block.get("intro", ""))}</p>', '  </div>', '</div>',
+           '<section>', '  <div class="wrap prose">']
+    if not items:
+        out.append('    <p class="empty-note">עוד לא עלו כאן שיעורים. בקרוב.</p>')
+    for it in items:
+        out += ['    <article class="shiur shiur-video">',
+                f'      <h2>{esc(it["title"])}</h2>',
+                f'      <p class="shiur-rav">{esc(it["when"])}</p>',
+                '      <div class="video-frame">',
+                f'        <iframe src="{esc(embed_src(it))}" '
+                f'title="{esc(it["title"])}" loading="lazy" allow="accelerometer; encrypted-media; '
+                'gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>',
+                '      </div>']
+        out += [f'      <p>{esc(par)}</p>' for par in str(it["about"]).split(NL) if par.strip()]
+        out.append('    </article>')
+    out += ['  </div>', '</section>']
+    return NL.join(out)
+
+
+LINK_HARAV = NL.join([
+    '<section>', '  <div class="wrap prose">',
+    '    <h2 class="section-title">שיעורים של הרב יעקב מאור</h2>',
+    '    <p>שיעורי וידאו מלאים מהשיעור השבועי בכולל, עם כתוביות: '
+    '<a href="/harav.html">לתיקיית השיעורים של הרב</a>.</p>',
+    '  </div>', '</section>'])
+
+
 def shiurim_body() -> tuple:
     data = json.loads((HERE / "data" / "shiurim.json").read_text(encoding="utf-8"))
     body = "\n\n".join([
@@ -174,6 +219,7 @@ def shiurim_body() -> tuple:
         '    <p>שיעורים של רבני הכולל, ולצידם שיעורים של רבנים אחרים שאני לומד '
         'מהם. כל שיעור כאן עולה באישור, ולצידו הסבר קצר למה הוא נמצא כאן.</p>\n'
         '  </div>\n</div>',
+        LINK_HARAV,
         LINK_MEHASHIUR,
         MIKDASH_LIBRARY,
         shiur_section(data["kollel"]),
@@ -190,6 +236,8 @@ def main():
     for name, (active, title, desc) in PAGES.items():
         if name == "shiurim.html":
             body, live, held = shiurim_body()
+        elif name == "harav.html":
+            body = harav_body()
         elif name == "mehashiur.html":
             body = mehashiur_body()
         else:
