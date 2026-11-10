@@ -8,7 +8,8 @@
   "meeting": 42,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00581-3",
@@ -19,7 +20,8 @@
   "meeting": 44,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00570-2",
@@ -30,7 +32,8 @@
   "meeting": 45,
   "source": "other: הרמח\"ל, מסילת ישרים",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00562-2",
@@ -41,7 +44,8 @@
   "meeting": 46,
   "source": "other: חנן חסן, שיעור מעובד",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00606-1",
@@ -52,7 +56,8 @@
   "meeting": 46,
   "source": "own",
   "sit": "זוגיות",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00601-3",
@@ -63,7 +68,8 @@
   "meeting": 50,
   "source": "other: אדמו״ר הזקן, בעל התניא",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00602-2",
@@ -74,7 +80,8 @@
   "meeting": 54,
   "source": "other: אדמו״ר הרש״ב, מובא בהיום יום",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00543-2",
@@ -85,7 +92,8 @@
   "meeting": 55,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00559-1",
@@ -96,7 +104,8 @@
   "meeting": 55,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00585-1",
@@ -107,7 +116,8 @@
   "meeting": 58,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00585-2",
@@ -118,7 +128,8 @@
   "meeting": 58,
   "source": "own",
   "sit": "-",
-  "batch": "b00"
+  "batch": "b00",
+  "target": "emuna"
  },
  {
   "id": "pb-s00159-2",
@@ -129,7 +140,8 @@
   "meeting": 59,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00633-3",
@@ -140,7 +152,8 @@
   "meeting": 59,
   "source": "other: משנת אבות ורמב״ם",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00515-1",
@@ -151,7 +164,8 @@
   "meeting": 60,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00515-2",
@@ -162,7 +176,8 @@
   "meeting": 60,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00515-5",
@@ -173,7 +188,8 @@
   "meeting": 60,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00275-1",
@@ -184,7 +200,8 @@
   "meeting": 61,
   "source": "own",
   "sit": "משבר",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00556-2",
@@ -195,7 +212,8 @@
   "meeting": 62,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00741-1",
@@ -206,7 +224,8 @@
   "meeting": 62,
   "source": "own",
   "sit": "זוגיות",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00300-1",
@@ -217,7 +236,8 @@
   "meeting": 63,
   "source": "other: אוצר המדרשים",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00300-4",
@@ -228,7 +248,8 @@
   "meeting": 63,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00016-1",
@@ -239,7 +260,8 @@
   "meeting": 65,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00016-2",
@@ -250,7 +272,8 @@
   "meeting": 65,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00016-3",
@@ -261,7 +284,8 @@
   "meeting": 65,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00409-2",
@@ -272,7 +296,8 @@
   "meeting": 66,
   "source": "own",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00647-1",
@@ -283,7 +308,8 @@
   "meeting": 66,
   "source": "other: הרב עוזי קלכהיים זצ״ל, בראשית רבה",
   "sit": "-",
-  "batch": "b01"
+  "batch": "b01",
+  "target": "emuna"
  },
  {
   "id": "pb-s00185-3",
@@ -294,7 +320,8 @@
   "meeting": 67,
   "source": "other: מדרש במדבר רבה, סנהדרין, תענית",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00185-4",
@@ -305,7 +332,8 @@
   "meeting": 67,
   "source": "other: בבא מציעא, חגיגה, תפילת ראש השנה",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00185-6",
@@ -316,7 +344,8 @@
   "meeting": 67,
   "source": "other: נועם אלימלך",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00660-1",
@@ -327,7 +356,8 @@
   "meeting": 68,
   "source": "own",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00359-2",
@@ -338,7 +368,8 @@
   "meeting": 70,
   "source": "own",
   "sit": "פרנסה",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00725-1",
@@ -349,7 +380,8 @@
   "meeting": 72,
   "source": "other: שמואל א׳ ט״ז ורש״י",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00597-1",
@@ -360,7 +392,8 @@
   "meeting": 73,
   "source": "own",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00407-2",
@@ -371,7 +404,8 @@
   "meeting": 74,
   "source": "own",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00518-3",
@@ -382,7 +416,8 @@
   "meeting": 76,
   "source": "other: ספר התודעה",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00234-4",
@@ -393,7 +428,8 @@
   "meeting": 77,
   "source": "other: פרשת שמיני, תהילים",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00286-4",
@@ -404,7 +440,8 @@
   "meeting": 78,
   "source": "other: סיפורים של משתתפי השיעור",
   "sit": "כעס",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00165-4",
@@ -415,7 +452,8 @@
   "meeting": 81,
   "source": "other: מפרקי אבות, הגאון מוילנא",
   "sit": "-",
-  "batch": "b02"
+  "batch": "b02",
+  "target": "emuna"
  },
  {
   "id": "pb-s00591-1",
@@ -426,7 +464,8 @@
   "meeting": 82,
   "source": "other: פרקי אבות",
   "sit": "-",
-  "batch": "b03"
+  "batch": "b03",
+  "target": "emuna"
  },
  {
   "id": "pb-s00291-1",
@@ -437,7 +476,8 @@
   "meeting": 92,
   "source": "other: תומר דבורה, רבי משה קורדוברו",
   "sit": "-",
-  "batch": "b03"
+  "batch": "b03",
+  "target": "emuna"
  },
  {
   "id": "pb-s00025-4",
@@ -448,7 +488,8 @@
   "meeting": 310,
   "source": "other: הגמרא בכורות ח׳, רש״י",
   "sit": "-",
-  "batch": "b16"
+  "batch": "b16",
+  "target": "emuna"
  },
  {
   "id": "pb-s00000-1",
@@ -459,7 +500,8 @@
   "meeting": 324,
   "source": "other: רב מפאנוי, שומר אמונים, זוהר שמות, חידושי תורה תשי״ז (בקונטרס שהרב מצטט)",
   "sit": "-",
-  "batch": "b17"
+  "batch": "b17",
+  "target": "emuna"
  },
  {
   "id": "pb-s00369-1",
@@ -470,7 +512,8 @@
   "meeting": 326,
   "source": "other: נועם אלימלך, הבעל שם טוב, בהצגת הרב",
   "sit": "-",
-  "batch": "b17"
+  "batch": "b17",
+  "target": "emuna"
  },
  {
   "id": "pb-s00369-2",
@@ -481,7 +524,8 @@
   "meeting": 326,
   "source": "own",
   "sit": "משבר",
-  "batch": "b17"
+  "batch": "b17",
+  "target": "emuna"
  },
  {
   "id": "pb-s00316-1",
@@ -492,7 +536,8 @@
   "meeting": 327,
   "source": "other: נועם אלימלך, בהצגת הרב",
   "sit": "-",
-  "batch": "b17"
+  "batch": "b17",
+  "target": "emuna"
  },
  {
   "id": "pb-s00523-2",
@@ -503,7 +548,8 @@
   "meeting": 10,
   "source": "own",
   "sit": "-",
-  "batch": "b34"
+  "batch": "b34",
+  "target": "emuna"
  },
  {
   "id": "pb-s00688-1",
@@ -514,7 +560,8 @@
   "meeting": 5,
   "source": "own",
   "sit": "-",
-  "batch": "b34"
+  "batch": "b34",
+  "target": "emuna"
  },
  {
   "id": "pb-s00630-1",
@@ -525,7 +572,8 @@
   "meeting": 9,
   "source": "other: רבי חיים שמואלביץ, הפסק והיסח הדעת",
   "sit": "-",
-  "batch": "b34"
+  "batch": "b34",
+  "target": "emuna"
  },
  {
   "id": "pb-s00683-1",
@@ -536,7 +584,8 @@
   "meeting": 16,
   "source": "other: מסופר בערכים",
   "sit": "-",
-  "batch": "b34"
+  "batch": "b34",
+  "target": "emuna"
  },
  {
   "id": "pb-s00595-2",
@@ -547,7 +596,8 @@
   "meeting": 35,
   "source": "own",
   "sit": "-",
-  "batch": "b35"
+  "batch": "b35",
+  "target": "emuna"
  },
  {
   "id": "pb-s00659-2",
@@ -558,7 +608,8 @@
   "meeting": 40,
   "source": "other: חוק לישראל (פרשת מסעי)",
   "sit": "-",
-  "batch": "b35"
+  "batch": "b35",
+  "target": "emuna"
  },
  {
   "id": "pb-s00022-4",
@@ -569,6 +620,7 @@
   "meeting": 27,
   "source": "own",
   "sit": "משבר",
-  "batch": "b36"
+  "batch": "b36",
+  "target": "emuna"
  }
 ]

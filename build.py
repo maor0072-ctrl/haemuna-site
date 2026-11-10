@@ -121,7 +121,9 @@ CAT_ORDER = ["אמונה", "מידות", "תפילה", "השגחה", "בין א�
 def bank_items() -> list:
     if BANK.exists():
         BANK_COPY.write_text(BANK.read_text(encoding="utf-8"), encoding="utf-8")
-    return json.loads(BANK_COPY.read_text(encoding="utf-8")) if BANK_COPY.exists() else []
+    items = json.loads(BANK_COPY.read_text(encoding="utf-8")) if BANK_COPY.exists() else []
+    # פרשה, מועדים, הלכה, צדיקים וגאולה הולכים לאתר המקדש (ניתוב 12408, 10.11.2026)
+    return [it for it in items if it.get("target", "emuna") == "emuna"]
 
 
 def source_line(it: dict) -> str:
