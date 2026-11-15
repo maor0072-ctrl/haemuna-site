@@ -46,6 +46,9 @@ PAGES = {
     "mehashiur.html": ("shiurim", f"מתוך השיעור השבועי | {SITE}",
                        "רעיונות, סיפורים ותשובות מתוך השיעור השבועי של הרב יעקב "
                        "מאור, לפי נושאים: אמונה, מידות ועוד."),
+    "parsha.html": ("shiurim", f"פרשת שבוע | {SITE}",
+                    "רעיונות וסיפורים על פרשת השבוע מאת הרב אשר ברדה, משידוריו "
+                    "בקול ברמה, לפי פרשות: אמונה, מידות ועוד."),
     "harav.html": ("shiurim", f"שיעורים של הרב יעקב מאור | {SITE}",
                    "שיעורי וידאו מלאים של הרב יעקב מאור מהשיעור השבועי בכולל, "
                    "עם כתוביות, לצפייה בטלפון ובמחשב."),
@@ -55,8 +58,21 @@ PAGES = {
 }
 
 
+try:  # מנקה הפיסוק של ה-AIOS; הריפו עומד בפני עצמו, ולכן יש גיבוי מקומי
+    import sys
+    sys.path.insert(0, str(HERE.parent.parent / "scripts"))
+    from plain_punct import fix  # noqa: E402
+except ImportError:
+    _PUNCT = str.maketrans({"״": '"', "׳": "'", "„": '"', "”": '"', "“": '"', "«": '"', "»": '"',
+                            "’": "'", "‘": "'", "–": "-", "—": "-"})
+
+    def fix(text):
+        return str(text).translate(_PUNCT).replace("**", "")
+
+
 def esc(s) -> str:
-    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
+    # כלל 40: פיסוק פשוט בלבד בכל מה שיוצא מכאן - מנקים לפני ה-escape
+    return (fix(str(s)).replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;").replace('"', "&quot;"))
 
 
@@ -160,7 +176,65 @@ def mehashiur_body() -> str:
             sec.append('    </article>')
         sec += ['  </div>', '</section>']
         out.append(NL.join(sec))
+    out.append(LINK_PARSHA)
     return (NL + NL).join(out)
+
+
+# פרשת שבוע: קטעים מאושרים משידורי הרב אשר ברדה בקול ברמה (טופיק 7966 כותב את
+# data/parsha.json; יעקב אישר את הקטגוריה ואת הקטעים ב-15.11.2026). נפרד מ-mehashiur,
+# שהוא דברי הרב יעקב מאור בלבד. מסודר לפי סדר הפרשות בתורה, הקרדיט בכל קטע.
+PARSHA_DATA = HERE / "data" / "parsha.json"
+PARSHIOT = ["בראשית", "נח", "לך לך", "וירא", "חיי שרה", "תולדות", "ויצא", "וישלח", "וישב",
+            "מקץ", "ויגש", "ויחי", "שמות", "וארא", "בא", "בשלח", "יתרו", "משפטים", "תרומה",
+            "תצוה", "כי תשא", "ויקהל", "פקודי", "ויקרא", "צו", "שמיני", "תזריע", "מצורע",
+            "אחרי מות", "קדושים", "אמור", "בהר", "בחוקותי", "במדבר", "נשא", "בהעלותך", "שלח",
+            "קרח", "חקת", "בלק", "פינחס", "מטות", "מסעי", "דברים", "ואתחנן", "עקב", "ראה",
+            "שופטים", "כי תצא", "כי תבא", "נצבים", "וילך", "האזינו", "וזאת הברכה"]
+
+
+def parsha_body() -> str:
+    items = json.loads(PARSHA_DATA.read_text(encoding="utf-8")) if PARSHA_DATA.exists() else []
+    by = {}
+    for it in items:
+        by.setdefault(it.get("parsha") or "", []).append(it)
+    order = sorted(by, key=lambda x: (PARSHIOT.index(x) if x in PARSHIOT else 99, x))
+    anchor = lambda p: esc(p.replace(" ", "-")) if p else "general"
+    toc = " · ".join(f'<a href="#{anchor(p)}">{esc(p)}</a>' for p in order if p)
+    head = ['<div class="page-head">', '  <div class="wrap">',
+            '    <h1>פרשת שבוע</h1>',
+            '    <p>רעיונות וסיפורים על פרשת השבוע מאת הרב אשר ברדה, מתוך שידוריו '
+            'ברדיו קול ברמה, לפי סדר הפרשות.</p>']
+    if toc:
+        head.append(f'    <p>{toc}</p>')
+    head += ['  </div>', '</div>']
+    out = [NL.join(head)]
+    if not items:
+        out.append('<section><div class="wrap"><p class="empty-note">בקרוב.</p></div></section>')
+    for par in order:
+        sec = ['<section>', '  <div class="wrap prose">',
+               f'    <h2 class="section-title" id="{anchor(par)}">'
+               f'{esc("פרשת " + par if par else "על הפרשה בכלל")}</h2>']
+        for it in by[par]:
+            sec.append('    <article class="shiur">')
+            sec.append(f'      <h3>{esc(it.get("title") or it.get("hook"))}</h3>')
+            if it.get("hook") and it.get("title"):
+                sec.append(f'      <p><strong>{esc(it["hook"])}</strong></p>')
+            sec += [f'      <p>{esc(par_)}</p>' for par_ in str(it["body"]).split(NL) if par_.strip()]
+            tag = it.get("cat") if it.get("cat") not in ("", None, "פרשת שבוע") else ""
+            sec.append(f'      <p class="shiur-rav">{esc(it.get("source", ""))}'
+                       + (f' · {esc(tag)}' if tag else "") + '</p>')
+            sec.append('    </article>')
+        sec += ['  </div>', '</section>']
+        out.append(NL.join(sec))
+    return (NL + NL).join(out)
+
+
+LINK_PARSHA = NL.join([
+    '<section>', '  <div class="wrap prose">',
+    '    <h2 class="section-title">פרשת שבוע</h2>',
+    '    <p>רעיונות וסיפורים על פרשת השבוע מאת הרב אשר ברדה, משידוריו בקול ברמה: '
+    '<a href="/parsha.html">לפרשת השבוע</a>.</p>',
+    '  </div>', '</section>'])
 
 
 LINK_MEHASHIUR = NL.join([
@@ -223,6 +297,7 @@ def shiurim_body() -> tuple:
         '  </div>\n</div>',
         LINK_HARAV,
         LINK_MEHASHIUR,
+        LINK_PARSHA,
         MIKDASH_LIBRARY,
         shiur_section(data["kollel"]),
         shiur_section(data["guests"]),
@@ -242,6 +317,8 @@ def main():
             body = harav_body()
         elif name == "mehashiur.html":
             body = mehashiur_body()
+        elif name == "parsha.html":
+            body = parsha_body()
         else:
             body = (HERE / "pages" / name).read_text(encoding="utf-8")
         (HERE / name).write_text(shell(active, title, desc, body), encoding="utf-8")
